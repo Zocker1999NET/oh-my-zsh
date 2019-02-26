@@ -38,6 +38,10 @@ alias tkss='tmux kill-session -t'
 # systems without the proper terminfo
 : ${ZSH_TMUX_FIXTERM_WITH_256COLOR:=screen-256color}
 
+echo "Session Name: $ZSH_TMUX_SESSION_NAME"
+echo "Auto Connect: $ZSH_TMUX_AUTOCONNECT"
+sleep 5
+
 # Determine if the terminal supports 256 colors
 if [[ $terminfo[colors] == 256 ]]; then
   export ZSH_TMUX_TERM=$ZSH_TMUX_FIXTERM_WITH_256COLOR
