@@ -18,8 +18,11 @@ alias tkss='tmux kill-session -t'
 # Only autostart once. If set to false, tmux will attempt to
 # autostart every time your zsh configs are reloaded.
 : ${ZSH_TMUX_AUTOSTART_ONCE:=true}
-# Automatically connect to a previous session if it exists
-: ${ZSH_TMUX_AUTOCONNECT:=true}
+# Set to which session should be automatically connect to
+# Empty means just connect to the previous session if it exists
+: ${ZSH_TMUX_SESSION_NAME:=}
+# Automatically connect to a previous session with the given name if it exists
+: ${ZSH_TMUX_AUTOCONNECT:=$([[ -z "$ZSH_TMUX_SESSION_NAME" ]] && echo "false" || echo "true")}
 # Automatically close the terminal when tmux exits
 : ${ZSH_TMUX_AUTOQUIT:=$ZSH_TMUX_AUTOSTART}
 # Set term to screen or screen-256color based on current terminal support
