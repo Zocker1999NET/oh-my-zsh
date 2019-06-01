@@ -11,14 +11,16 @@ fi
 # Location of git bare repository
 : ${DOTFILES_CONFIG_DIRECTORY="$HOME/.cfg"};
 
-# Constants
+# Configure helper alias
 
-DOTFILES_CONFIG_GIT_COMMAND="git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
+config-git() {
+  git --git-dir="$DOTFILES_CONFIG_DIRECTORY/" --work-tree="$HOME" "$@";
+}
 
 # Configure alias command
 
 _zsh_dot-config_configuration() {
-  $DOTFILES_CONFIG_GIT_COMMAND config --local status.showUntrackedFiles no;
+  config-git config --local status.showUntrackedFiles no;
 }
 
 config() {
@@ -37,13 +39,13 @@ config() {
       echo "Destroy repository with \"config destroy\"";
       return 1;
     else
-      $DOTFILES_CONFIG_GIT_COMMAND clone --quiet --bare "$DOTFILES_CONFIG_DIRECTORY";
+      config-git clone --quiet --bare "$DOTFILES_CONFIG_DIRECTORY";
       _zsh_dot-config_configuration;
-      if ! $DOTFILES_CONFIG_GIT_COMMAND checkout; then
+      if ! config-git checkout; then
         echo "Backing up pre-existing dot files";
         mkdir -p .config-backup;
-        $DOTFILES_CONFIG_GIT_COMMAND checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{};
-        $DOTFILES_CONFIG_GIT_COMMAND checkout;
+        config-git checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{};
+        config-git checkout;
       fi
     fi
   elif [[ "$1" == "destroy" ]]; then
@@ -63,7 +65,7 @@ config() {
     echo "See more commands from git: \"git help\"";
   else
     if [[ -d "$DOTFILES_CONFIG_DIRECTORY" ]]; then
-      $DOTFILES_CONFIG_GIT_COMMAND "$@"
+      config-git "$@"
     else
       echo "Configuration directory $DOTFILES_CONFIG_DIRECTORY not initialized yet";
       echo "Intialize repository with \"config init\"";
