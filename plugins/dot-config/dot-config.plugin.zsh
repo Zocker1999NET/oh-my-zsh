@@ -6,14 +6,14 @@ if ! (( $+commands[git] )); then
     return 1
 fi
 
-# Contants
-
-DOTFILES_CONFIG_GIT_COMMAND="/usr/bin/git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
-
 # Configuration
 
 # Location of git bare repository
 : ${DOTFILES_CONFIG_DIRECTORY="$HOME/.cfg"};
+
+# Contants
+
+DOTFILES_CONFIG_GIT_COMMAND="/usr/bin/git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
 
 # Configure alias command
 
