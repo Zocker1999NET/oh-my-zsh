@@ -13,7 +13,7 @@ fi
 
 # Constants
 
-DOTFILES_CONFIG_GIT_COMMAND="/usr/bin/git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
+DOTFILES_CONFIG_GIT_COMMAND="git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
 
 # Configure alias command
 
