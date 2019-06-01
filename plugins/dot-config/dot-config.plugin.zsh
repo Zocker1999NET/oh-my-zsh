@@ -11,7 +11,7 @@ fi
 # Location of git bare repository
 : ${DOTFILES_CONFIG_DIRECTORY="$HOME/.cfg"};
 
-# Contants
+# Constants
 
 DOTFILES_CONFIG_GIT_COMMAND="/usr/bin/git --git-dir=\"$DOTFILES_CONFIG_DIRECTORY/\" --work-tree=\"$HOME\"";
 
